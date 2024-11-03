@@ -109,7 +109,7 @@ if(NOT ${found})
         if(CMAKE_CROSSCOMPILING)
           message(STATUS "Cannot probe for Python/Numpy support (because we are cross-compiling OpenCV)")
           message(STATUS "If you want to enable Python/Numpy support, set the following variables:")
-          message(STATUS "  PYTHON3_INCLUDE_PATH")
+          message(STATUS "  PYTHON3_INCLUDE_DIRS")
           message(STATUS "  PYTHON3_LIBRARIES (optional on Unix-like systems)")
           message(STATUS "  PYTHON3_NUMPY_INCLUDE_DIRS")
         else()
@@ -164,7 +164,7 @@ if(OPENCV_PYTHON_SKIP_DETECTION)
 endif()
 
 option(OPENCV_PYTHON3_VERSION "Python3 version" "")
-find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARY PYTHON3_INCLUDE_DIR
+find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARIES PYTHON3_INCLUDE_DIRS
     PYTHON3INTERP_FOUND PYTHON3_EXECUTABLE PYTHON3_VERSION_STRING
     PYTHON3_VERSION_MAJOR PYTHON3_VERSION_MINOR PYTHON3LIBS_FOUND
     PYTHON3LIBS_VERSION_STRING PYTHON3_LIBRARIES
