@@ -125,8 +125,6 @@ if(NOT ${found})
         endif()
       endif()
 
-      status("_numpy_include_dirs: ${_numpy_include_dirs}")
-
       if(_numpy_include_dirs)
         file(TO_CMAKE_PATH "${_numpy_include_dirs}" _numpy_include_dirs)
         if(CMAKE_CROSSCOMPILING)
@@ -164,7 +162,7 @@ if(OPENCV_PYTHON_SKIP_DETECTION)
 endif()
 
 option(OPENCV_PYTHON3_VERSION "Python3 version" "")
-find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARIES PYTHON3_INCLUDE_DIRS
+find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARY PYTHON3_INCLUDE_DIR
     PYTHON3INTERP_FOUND PYTHON3_EXECUTABLE PYTHON3_VERSION_STRING
     PYTHON3_VERSION_MAJOR PYTHON3_VERSION_MINOR PYTHON3LIBS_FOUND
     PYTHON3LIBS_VERSION_STRING PYTHON3_LIBRARIES
