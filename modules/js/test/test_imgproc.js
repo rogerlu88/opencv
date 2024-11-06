@@ -71,6 +71,37 @@
 QUnit.module('Image Processing', {});
 
 QUnit.test('test_imgProc', function(assert) {
+    // applyColorMap
+    {
+        let src = cv.matFromArray(2, 1, cv.CV_8U, [50,100]);
+        cv.applyColorMap(src, src, cv.COLORMAP_BONE);
+
+        // Verify result.
+        let expected = new Uint8Array([60,44,44,119,89,87]);
+
+        assert.deepEqual(src.data, expected);
+        src.delete();
+    }
+ 
+    // blendLinear
+    {
+        let src1 = cv.matFromArray(2, 1, cv.CV_8U, [50,100]);
+        let src2 = cv.matFromArray(2, 1, cv.CV_8U, [200,20]);
+        let weights1 = cv.matFromArray(2, 1, cv.CV_32F, [0.4,0.5]);
+        let weights2 = cv.matFromArray(2, 1, cv.CV_32F, [0.6,0.5]);
+        let dst = new cv.Mat();
+        cv.blendLinear(src1, src2, weights1, weights2, dst);
+
+        // Verify result.
+        let expected = new Uint8Array([140,60]);
+
+        assert.deepEqual(dst.data, expected);
+        src1.delete();
+        src2.delete();
+        weights1.delete();
+        weights2.delete();
+    }
+
     // calcHist
     {
         let vec1 = new cv.Mat.ones(new cv.Size(20, 20), cv.CV_8UC1); // eslint-disable-line new-cap
@@ -427,6 +458,18 @@ QUnit.test('test_filter', function(assert) {
         assert.equal(mat2.channels(), 1);
         assert.equal(size.height, 7);
         assert.equal(size.width, 7);
+    }
+
+    // stackBlur
+    {
+        let src = cv.matFromArray(2, 3, cv.CV_8U, [10,25,30,45,50,60]);
+        cv.stackBlur(src, src, new cv.Size(3, 3));
+
+        // Verify result.
+        let expected = new Uint8Array([22,29,36,38,43,50]);
+
+        assert.deepEqual(src.data, expected);
+        src.delete();
     }
 
     // medianBlur
