@@ -2,8 +2,6 @@
 # Arguments:
 #   preferred_version (value): Version to check for first
 #   min_version (value): Minimum supported version
-#   library_env (value): Name of Python library ENV variable to check
-#   include_dir_env (value): Name of Python include directory ENV variable to check
 #   found (variable): Set if interpreter found
 #   executable (variable): Output of executable found
 #   version_string (variable): Output of found version
@@ -16,7 +14,7 @@
 #   packages_path (variable): Output of found Python packages path
 #   numpy_include_dirs (variable): Output of found Python Numpy include dirs
 #   numpy_version (variable): Output of found Python Numpy version
-function(find_python preferred_version min_version library_env include_dir_env
+function(find_python preferred_version min_version
          found executable version_string version_major version_minor
          libs_found libs_version_string libraries include_dirs packages_path
          numpy_include_dirs numpy_version)
@@ -69,14 +67,6 @@ if(NOT ${found})
     set(_version_major_minor "${_version_major}.${_version_minor}")
 
     if(NOT ANDROID AND NOT APPLE_FRAMEWORK)
-      ocv_check_environment_variables(${library_env} ${include_dir_env})
-      if(NOT ${${library_env}} STREQUAL "")
-          set(Python3_LIBRARY "${${library_env}}")
-      endif()
-      if(NOT ${${include_dir_env}} STREQUAL "")
-          set(Python3_INCLUDE_DIR "${${include_dir_env}}")
-      endif()
-
       # not using _version_string here, because it might not conform to the CMake version format
       if(CMAKE_CROSSCOMPILING)
         # builder version can differ from target, matching base version (e.g. 2.7)
@@ -162,7 +152,7 @@ if(OPENCV_PYTHON_SKIP_DETECTION)
 endif()
 
 option(OPENCV_PYTHON3_VERSION "Python3 version" "")
-find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARY PYTHON3_INCLUDE_DIR
+find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}"
     PYTHON3INTERP_FOUND PYTHON3_EXECUTABLE PYTHON3_VERSION_STRING
     PYTHON3_VERSION_MAJOR PYTHON3_VERSION_MINOR PYTHON3LIBS_FOUND
     PYTHON3LIBS_VERSION_STRING PYTHON3_LIBRARIES
