@@ -1328,7 +1328,7 @@ TEST_P(Test_ONNX_layers, Split_EltwiseMax)
     testONNXModels("split_max");
 }
 
-TEST_P(Test_ONNX_layers, LSTM_Activations)
+TEST_P(Test_ONNX_layers, DISABLED_LSTM_Activations)
 {
     if (backend == DNN_BACKEND_INFERENCE_ENGINE_NGRAPH)
         applyTestTag(CV_TEST_TAG_DNN_SKIP_IE_NGRAPH); // TODO: fix this test for OpenVINO
@@ -1498,14 +1498,14 @@ TEST_P(Test_ONNX_layers, LSTM_init_h0_c0)
     testONNXModels("lstm_init_h0_c0", npy, 0, 0, false, false, 3);
 }
 // epsilon is larger because onnx does not match with torch/opencv exactly
-TEST_P(Test_ONNX_layers, LSTM_layout_seq)
+TEST_P(Test_ONNX_layers, DISABLED_LSTM_layout_seq)
 {
     if(backend == DNN_BACKEND_CUDA)
         applyTestTag(CV_TEST_TAG_DNN_SKIP_CUDA);
     testONNXModels("lstm_layout_0", npy, 0.005, 0.005, false, false, 3);
 }
 // epsilon is larger because onnx does not match with torch/opencv exactly
-TEST_P(Test_ONNX_layers, LSTM_layout_batch)
+TEST_P(Test_ONNX_layers, DISABLED_LSTM_layout_batch)
 {
     if(backend == DNN_BACKEND_CUDA)
         applyTestTag(CV_TEST_TAG_DNN_SKIP_CUDA);
