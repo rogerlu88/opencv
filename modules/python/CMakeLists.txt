@@ -26,6 +26,11 @@ if(DEFINED OPENCV_INITIAL_PASS)  # OpenCV build
 else()  # standalone build
 
   cmake_minimum_required(VERSION 3.13)
+
+  if(POLICY CMP0094)
+    cmake_policy(SET CMP0094 NEW) # CMake 3.15+: Modules FindPython3 uses LOCATION for lookup strategy.
+  endif()
+
   project(OpenCVPython CXX C)
   include("./standalone.cmake")
 
