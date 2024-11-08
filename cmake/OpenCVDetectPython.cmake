@@ -19,6 +19,9 @@ function(find_python preferred_version min_version
          libs_found libs_version_string libraries include_dirs packages_path
          numpy_include_dirs numpy_version)
 if(NOT ${found})
+  # This line can be remove after raising cmake_minimum_required to 3.15
+  set(Python3_FIND_STRATEGY "LOCATION")
+
   if(" ${executable}" STREQUAL " PYTHON_EXECUTABLE")
     set(__update_python_vars 0)
   else()
@@ -152,7 +155,7 @@ if(OPENCV_PYTHON_SKIP_DETECTION)
 endif()
 
 option(OPENCV_PYTHON3_VERSION "Python3 version" "")
-find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}"
+find_python("${OPENCV_PYTHON3_VERSION}" "${MIN_VER_PYTHON3}" PYTHON3_LIBRARY PYTHON3_INCLUDE_DIR
     PYTHON3INTERP_FOUND PYTHON3_EXECUTABLE PYTHON3_VERSION_STRING
     PYTHON3_VERSION_MAJOR PYTHON3_VERSION_MINOR PYTHON3LIBS_FOUND
     PYTHON3LIBS_VERSION_STRING PYTHON3_LIBRARIES
