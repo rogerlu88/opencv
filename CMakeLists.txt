@@ -24,10 +24,6 @@ if(POLICY CMP0091)
   cmake_policy(SET CMP0091 NEW) # CMake 3.15+: leave MSVC runtime selection out of default CMAKE_<LANG>_FLAGS_<CONFIG> flags
 endif()
 
-if(POLICY CMP0094)
-  cmake_policy(SET CMP0094 NEW) # CMake 3.15+: Modules FindPython3 uses LOCATION for lookup strategy.
-endif()
-
 if(POLICY CMP0146)
   cmake_policy(SET CMP0146 OLD)  # CMake 3.27+: use CMake FindCUDA if available.
 endif()
